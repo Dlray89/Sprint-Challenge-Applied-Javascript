@@ -11,8 +11,10 @@
 axios.get(" https://lambda-times-backend.herokuapp.com/topics")
 .then((response) => {
     console.log(response)
+
 const grabTopics = topicMaker(response.data);
 attachTab.appendChild(grabTopics)
+
 }).catch((error) => {
     console.log('An error has occur', error)
 });
@@ -21,11 +23,11 @@ function topicMaker(data){
 const newTab = document.createElement('div');
 
 newTab.classList.add('tab');
-newTab.textContent = `Topic Here: ${data.topics}`
+newTab.textContent = ` ${data.topics[0]} ,${data.topics[1]}, ${data.topics[2]}, ${data.topics[3]}, ${data.topics[4]}`
 console.log(newTab)
 
 return newTab
 }
 
-const attachTab = document.querySelector('body');
+const attachTab = document.querySelector('.tabs');
 

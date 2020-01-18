@@ -20,15 +20,20 @@
 
 axios.get(" https://lambda-times-backend.herokuapp.com/articles")
 .then( response => {
-// console.log(response.data)
-const gitArticles = cardCreator(response.data);
+
+    const gitArticles = cardCreator(response.data.articles.javascript);
 entryPoint.appendChild(gitArticles);
+
+console.log(gitArticles)
+console.log(response.data.articles)
+
+
 })
 .catch( error => {
     console.log('an error has happen', error)
 });
 
-function cardCreator(article) {
+function cardCreator(info) {
 /////Create element//////
 
 const newCard = document.createElement('div');
@@ -45,13 +50,10 @@ newCard.classList.add('card');
 newHeadLine.classList.add('headline');
 newAuthor.classList.add('author');
 newIMGContainer.classList.add('img-container');
-newIMG.src = article.authorPhoto;
 ////////////////////////
-// /////text-content///////
-// newCard.textContent = `${articles.article}`
-// newHeadLine.textContent = 
-// newIMG.src = 
-// AuthorName.textContent = 
+/////text-content///////
+newIMG.src = 
+newHeadLine.textContent = info
 ////////////////////////////////////
 ///////append items///////////////
 newCard.appendChild(newHeadLine);
@@ -63,6 +65,7 @@ newIMGContainer.appendChild(newIMG);
 newIMGContainer.appendChild(AuthorName)
 ////////////////////////////////
 
+
 return newCard;
 }
-const entryPoint = document.querySelector('.cards-container');
+const entryPoint = document.querySelector('.cards-container')
