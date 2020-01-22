@@ -18,14 +18,17 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
+const entryPoint = document.querySelector('.cards-container')
+
 axios.get(" https://lambda-times-backend.herokuapp.com/articles")
 .then( response => {
 
-    const gitArticles = cardCreator(response.data.articles.javascript);
-entryPoint.appendChild(gitArticles);
-
-console.log(gitArticles)
-console.log(response.data.articles)
+console.log("this res from articles",response);
+Object.values(response.data.articles).forEach((items, index, array) => {
+    items.forEach((item, index, array) => {
+        entryPoint.append(cardCreator(item));
+    })
+})
 
 
 })
@@ -52,20 +55,19 @@ newAuthor.classList.add('author');
 newIMGContainer.classList.add('img-container');
 ////////////////////////
 /////text-content///////
-newIMG.src = 
-newHeadLine.textContent = info
+newHeadLine.textContent = info.headline;
+newIMG.src = info.authorPhoto;
+AuthorName.textContent = `By: ${info.authorName}`;
 ////////////////////////////////////
 ///////append items///////////////
 newCard.appendChild(newHeadLine);
-newCard.appendChild(newHeadLine);
 newCard.appendChild(newAuthor);
-newCard.appendChild(newIMGContainer);
+newAuthor.appendChild(newIMGContainer);
 
 newIMGContainer.appendChild(newIMG);
-newIMGContainer.appendChild(AuthorName)
+newAuthor.appendChild(AuthorName)
 ////////////////////////////////
 
 
 return newCard;
 }
-const entryPoint = document.querySelector('.cards-container')
